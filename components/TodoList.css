@@ -1,0 +1,13 @@
+.todo-list .top-bar {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.todo-list {
+    width: 70%;
+}
+
+.todo-list ul {
+    list-style: none;
+    padding: 5px;
+}

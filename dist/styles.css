@@ -1,0 +1,50 @@
+body {
+    width : 80%;
+    margin : 0 auto;
+}
+  
+.input {
+    font-size: 16px;
+    border: 1px solid #2C83A9;
+    padding: 10px;
+}
+
+.btn {
+    font-size: 16px;
+    background-color: #2C83A9;
+    color: #FFF;
+    border: 1px solid #2C83A9;
+    cursor : pointer;
+    padding: 10px;
+}
+  
+
+  
+
+.todo-list .top-bar {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.todo-list {
+    width: 70%;
+}
+
+.todo-list ul {
+    list-style: none;
+    padding: 5px;
+}
+.todo-list ul li {
+    background-color: #2C83A9;
+    color: #FFF;   
+    padding: 15px;
+    margin-bottom: 5px;
+}
+.search-form {
+    margin : 30px;
+    border : 0;
+}
+
+.search-form .btn {
+    margin: 0 1px;
+}    
