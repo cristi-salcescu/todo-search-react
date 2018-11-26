@@ -1,8 +1,11 @@
+import MicroEmitter from 'micro-emitter';
+
 export default function UserStore(dataService){
     "use strict"; 
     let usersMap = [];
     
-    let eventEmitter = $.Callbacks();
+    let eventEmitter = new MicroEmitter();
+    const CHANGE_EVENT = "change";
     
     function fetch() {
       return dataService.get().then(setLocalUsers);
@@ -10,7 +13,7 @@ export default function UserStore(dataService){
 
     function setLocalUsers(newUsers){
       usersMap = createMapFrom(newUsers);
-      eventEmitter.fire();
+      eventEmitter.emit(CHANGE_EVENT);
     }
 
     function getById(id){
@@ -25,10 +28,14 @@ export default function UserStore(dataService){
     function createMapFrom(list){
         return list.reduce(asMapById, Object.create(null));
     }
+
+    function onChange(handler){
+      eventEmitter.on(CHANGE_EVENT, handler);
+    }
     
     return Object.freeze({ 
       fetch,
       getById,
-      onChange : eventEmitter.add
+      onChange
     });
 }

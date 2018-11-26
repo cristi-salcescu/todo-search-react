@@ -1,10 +1,11 @@
-import $ from "jquery";
+import MicroEmitter from 'micro-emitter';
 import partial from "lodash/partial";
 
 export default function TodoStore(dataService, userStore){
     "use strict";
     let todos = [];
-    let eventEmitter = $.Callbacks();
+    let eventEmitter = new MicroEmitter();
+    const CHANGE_EVENT = "change";
     
     function fetch() {
       return dataService.get().then(setLocalTodos);
@@ -12,7 +13,7 @@ export default function TodoStore(dataService, userStore){
 
     function setLocalTodos(newTodos){
       todos = newTodos;
-      eventEmitter.fire();
+      eventEmitter.emit(CHANGE_EVENT);
     }
     
     function toViewModel(todo){
@@ -41,10 +42,14 @@ export default function TodoStore(dataService, userStore){
                   .map(toViewModel)
                   .sort(descById).slice(0, top);
     }
+
+    function onChange(handler){
+      eventEmitter.on(CHANGE_EVENT, handler);
+    }
     
     return Object.freeze({ 
       fetch,
       getBy,
-      onChange : eventEmitter.add
+      onChange
     });
  }

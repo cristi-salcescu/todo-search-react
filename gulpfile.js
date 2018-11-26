@@ -9,12 +9,6 @@ var cachebust = require('gulp-cache-bust');
 var distFolder = "./dist";
  
 // task
-gulp.task('concat:libs', function () {
-    gulp.src('node_modules/jquery/dist/jquery.js') // path to your files
-    .pipe(concat('libs.js'))  // concat and name it "concat.js"
-    .pipe(gulp.dest(distFolder));
-});
-
 gulp.task('concat:css', function () {
     gulp.src(["css/*.css", "components/*.css"])
     .pipe(concat('styles.css'))
@@ -52,4 +46,4 @@ gulp.task('watch', function () {
     gulp.watch(["css/*.css"], [ "concat:css" ]);
 });
 
-gulp.task( 'default', [ "eslint", "scripts", "concat:css", "concat:libs", "cachebust" ] )
+gulp.task( 'default', [ "eslint", "scripts", "concat:css", "cachebust" ] )
