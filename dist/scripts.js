@@ -280,6 +280,7 @@ function TodoDataService() {
   function toJson(response) {
     return response.json();
   }
+
   function get() {
     return fetch(url).then(toJson);
   }
@@ -25148,7 +25149,6 @@ function UserStore(dataService) {
     "use strict";
 
     var usersMap = [];
-
     var eventEmitter = new _microEmitter2.default();
     var CHANGE_EVENT = "change";
 

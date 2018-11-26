@@ -1,6 +1,6 @@
 export default function UserDataService(){
   "use strict";
-  let url = "https://jsonplaceholder.typicode.com/users";
+  const url = "https://jsonplaceholder.typicode.com/users";
 
   function get() {
     return fetch(url).then(toJson);

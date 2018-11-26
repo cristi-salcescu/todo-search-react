@@ -13,7 +13,7 @@ export default class TodoSearch extends React.Component {
   }
   
   search(){
-    let query = Object.freeze({ text: this.state.text });
+    const query = Object.freeze({ text: this.state.text });
     if(this.props.onSearch)
       this.props.onSearch(query);
   }

@@ -9,12 +9,12 @@ import TodoContainer from "./components/TodoContainer.jsx";
 (function startApplication(){
     "use strict";
 
-    let userDataService = UserDataService();
-    let todoDataService = TodoDataService();
-    let userStore = UserStore(userDataService);
-    let todoStore = TodoStore(todoDataService, userStore);
+    const userDataService = UserDataService();
+    const todoDataService = TodoDataService();
+    const userStore = UserStore(userDataService);
+    const todoStore = TodoStore(todoDataService, userStore);
     
-    let stores = {
+    const stores = {
       todoStore,
       userStore
     };

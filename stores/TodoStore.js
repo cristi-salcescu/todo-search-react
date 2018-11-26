@@ -4,7 +4,7 @@ import partial from "lodash/partial";
 export default function TodoStore(dataService, userStore){
     "use strict";
     let todos = [];
-    let eventEmitter = new MicroEmitter();
+    const eventEmitter = new MicroEmitter();
     const CHANGE_EVENT = "change";
     
     function fetch() {
@@ -36,8 +36,8 @@ export default function TodoStore(dataService, userStore){
     } 
     
     function getBy(query) {
-      let top = 25;
-      let byQuery = partial(queryContainsTodo, query);
+      const top = 25;
+      const byQuery = partial(queryContainsTodo, query);
       return todos.filter(byQuery)
                   .map(toViewModel)
                   .sort(descById).slice(0, top);

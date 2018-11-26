@@ -19,7 +19,7 @@ export default class TodoContainer extends React.Component {
   }
   
   reload(){
-    let todos = this.todoStore.getBy(this.query);
+    const todos = this.todoStore.getBy(this.query);
     this.setState({ todos });
   }
   

@@ -1,10 +1,11 @@
 export default function TodoDataService(){
     "use strict";
-    let url = "https://jsonplaceholder.typicode.com/todos";
+    const url = "https://jsonplaceholder.typicode.com/todos";
     
     function toJson(response){
       return response.json();
     }
+    
     function get() {
       return fetch(url).then(toJson);
     }
