@@ -1,3 +1,9 @@
+# Splitting a Single Page Application into layers has a set of advantages:
+
+* a better separation of concerns
+* the layer implementation can be replaced
+* the UI layer can be hard to test. By moving the logic to other layers, it becomes easier to test.
+
 Open the ./dist/index.html.
 All bundles are already generated, there is no need to run any extra tasks.
 
