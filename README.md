@@ -15,18 +15,6 @@ How to run Gulp
 
 Gulp is used to bundle all modules together, concatenate css files, linting.
 
-# Architecture
-The application is split in 3 layers:
-- presentation: the "components" folder
-- stores : the "stores" folder
-- data access: the "dataacess" folder
-
-Data Access objects make ajax requests.
-Stores keep and manage state.
-Components render data and manage user interation.
-
-The main.js builds all the necesary objects and mounts the page.
-
 # Tests
 Jest is used for testing.
 Execute `npm test` to run the tests.
