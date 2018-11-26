@@ -1,4 +1,6 @@
-# Splitting a Single Page Application into layers has a set of advantages:
+#How to create a three layer application with React
+
+Splitting a Single Page Application into layers has a set of advantages:
 
 * a better separation of concerns
 * the layer implementation can be replaced
