@@ -6,10 +6,10 @@ export default class TodoSearch extends React.Component {
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-  
-  componentWillMount() {
-    this.setState({text: ""});
+
+    this.state = {
+      text: ""
+    };
   }
   
   search(){

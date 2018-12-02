@@ -42,16 +42,19 @@ var TodoContainer = function (_React$Component) {
     _this.todoStore = props.stores.todoStore;
     _this.search = _this.search.bind(_this);
     _this.reload = _this.reload.bind(_this);
+
+    _this.query = null;
+    _this.state = {
+      todos: []
+    };
     return _this;
   }
 
   _createClass(TodoContainer, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       this.todoStore.onChange(this.reload);
       this.todoStore.fetch();
-      this.query = null;
-      this.setState({ todos: [] });
     }
   }, {
     key: "reload",
@@ -208,15 +211,14 @@ var TodoSearch = function (_React$Component) {
     _this.search = _this.search.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
+
+    _this.state = {
+      text: ""
+    };
     return _this;
   }
 
   _createClass(TodoSearch, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.setState({ text: "" });
-    }
-  }, {
     key: "search",
     value: function search() {
       var query = Object.freeze({ text: this.state.text });

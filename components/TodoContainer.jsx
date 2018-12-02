@@ -9,13 +9,16 @@ export default class TodoContainer extends React.Component {
     this.todoStore = props.stores.todoStore;
     this.search = this.search.bind(this);
     this.reload = this.reload.bind(this);
+
+    this.query = null;
+    this.state = {
+      todos: []
+    };
   }
   
-  componentWillMount(){
+  componentDidMount(){
     this.todoStore.onChange(this.reload);
     this.todoStore.fetch();
-    this.query = null;
-    this.setState({todos : []});
   }
   
   reload(){
