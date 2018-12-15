@@ -19,7 +19,8 @@ export default class TodoSearch extends React.Component {
   }
   
   handleChange(event) {
-    this.setState({text: event.target.value});
+    const query = Object.freeze({ text: event.target.value });
+    this.setState(query);
   }
 
   handleKeyPress(event) {

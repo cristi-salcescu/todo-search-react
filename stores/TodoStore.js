@@ -2,7 +2,6 @@ import MicroEmitter from 'micro-emitter';
 import partial from "lodash/partial";
 
 export default function TodoStore(dataService, userStore){
-    "use strict";
     let todos = [];
     const eventEmitter = new MicroEmitter();
     const CHANGE_EVENT = "change";

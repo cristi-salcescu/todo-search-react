@@ -1,7 +1,6 @@
 import MicroEmitter from 'micro-emitter';
 
 export default function UserStore(dataService){
-    "use strict"; 
     let usersMap = []; 
     const eventEmitter = new MicroEmitter();
     const CHANGE_EVENT = "change";

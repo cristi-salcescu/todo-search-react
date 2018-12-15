@@ -113,7 +113,6 @@ var _TodoListItem2 = _interopRequireDefault(_TodoListItem);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function TodoList(props) {
-  "use strict";
 
   function renderTodoItem(todo) {
     return _react2.default.createElement(_TodoListItem2.default, { todo: todo, key: todo.id });
@@ -153,8 +152,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function TodoListItem(props) {
-  "use strict";
-
   return _react2.default.createElement(
     "li",
     null,
@@ -227,7 +224,8 @@ var TodoSearch = function (_React$Component) {
   }, {
     key: "handleChange",
     value: function handleChange(event) {
-      this.setState({ text: event.target.value });
+      var query = Object.freeze({ text: event.target.value });
+      this.setState(query);
     }
   }, {
     key: "handleKeyPress",
@@ -275,8 +273,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = TodoDataService;
 function TodoDataService() {
-  "use strict";
-
   var url = "https://jsonplaceholder.typicode.com/todos";
 
   function toJson(response) {
@@ -308,8 +304,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = UserDataService;
 function UserDataService() {
-  "use strict";
-
   var url = "https://jsonplaceholder.typicode.com/users";
 
   function get() {
@@ -359,8 +353,6 @@ var _TodoContainer2 = _interopRequireDefault(_TodoContainer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (function startApplication() {
-  "use strict";
-
   var userDataService = (0, _UserDataService2.default)();
   var todoDataService = (0, _TodoDataService2.default)();
   var userStore = (0, _UserStore2.default)(userDataService);
@@ -25082,8 +25074,6 @@ var _partial2 = _interopRequireDefault(_partial);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function TodoStore(dataService, userStore) {
-  "use strict";
-
   var todos = [];
   var eventEmitter = new _microEmitter2.default();
   var CHANGE_EVENT = "change";
@@ -25148,8 +25138,6 @@ var _microEmitter2 = _interopRequireDefault(_microEmitter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function UserStore(dataService) {
-    "use strict";
-
     var usersMap = [];
     var eventEmitter = new _microEmitter2.default();
     var CHANGE_EVENT = "change";

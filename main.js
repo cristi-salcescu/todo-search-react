@@ -7,8 +7,6 @@ import UserStore from "./stores/UserStore";
 import TodoContainer from "./components/TodoContainer.jsx";
 
 (function startApplication(){
-    "use strict";
-
     const userDataService = UserDataService();
     const todoDataService = TodoDataService();
     const userStore = UserStore(userDataService);

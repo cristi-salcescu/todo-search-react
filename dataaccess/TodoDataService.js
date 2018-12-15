@@ -1,5 +1,4 @@
 export default function TodoDataService(){
-    "use strict";
     const url = "https://jsonplaceholder.typicode.com/todos";
     
     function toJson(response){
