@@ -224,8 +224,7 @@ var TodoSearch = function (_React$Component) {
   }, {
     key: "handleChange",
     value: function handleChange(event) {
-      var query = Object.freeze({ text: event.target.value });
-      this.setState(query);
+      this.setState({ text: event.target.value });
     }
   }, {
     key: "handleKeyPress",
