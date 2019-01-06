@@ -1,4 +1,4 @@
-export default function TodoDataService(){
+export default function TodoGateway(){
     const url = "https://jsonplaceholder.typicode.com/todos";
     
     function toJson(response){

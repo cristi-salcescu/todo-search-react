@@ -270,8 +270,8 @@ TodoSearch.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = TodoDataService;
-function TodoDataService() {
+exports.default = TodoGateway;
+function TodoGateway() {
   var url = "https://jsonplaceholder.typicode.com/todos";
 
   function toJson(response) {
@@ -301,8 +301,8 @@ function TodoDataService() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = UserDataService;
-function UserDataService() {
+exports.default = UserGateway;
+function UserGateway() {
   var url = "https://jsonplaceholder.typicode.com/users";
 
   function get() {
@@ -329,13 +329,13 @@ var _reactDom = require("react-dom");
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _TodoDataService = require("./dataaccess/TodoDataService");
+var _TodoGateway = require("./gateways/TodoGateway");
 
-var _TodoDataService2 = _interopRequireDefault(_TodoDataService);
+var _TodoGateway2 = _interopRequireDefault(_TodoGateway);
 
-var _UserDataService = require("./dataaccess/UserDataService");
+var _UserGateway = require("./gateways/UserGateway");
 
-var _UserDataService2 = _interopRequireDefault(_UserDataService);
+var _UserGateway2 = _interopRequireDefault(_UserGateway);
 
 var _TodoStore = require("./stores/TodoStore");
 
@@ -352,28 +352,28 @@ var _TodoContainer2 = _interopRequireDefault(_TodoContainer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (function startApplication() {
-  var userDataService = (0, _UserDataService2.default)();
-  var todoDataService = (0, _TodoDataService2.default)();
-  var userStore = (0, _UserStore2.default)(userDataService);
-  var todoStore = (0, _TodoStore2.default)(todoDataService, userStore);
+    var userGateway = (0, _UserGateway2.default)();
+    var todoGateway = (0, _TodoGateway2.default)();
+    var userStore = (0, _UserStore2.default)(userGateway);
+    var todoStore = (0, _TodoStore2.default)(todoGateway, userStore);
 
-  var stores = {
-    todoStore: todoStore,
-    userStore: userStore
-  };
+    var stores = {
+        todoStore: todoStore,
+        userStore: userStore
+    };
 
-  function loadStaticData() {
-    return Promise.all([userStore.fetch()]);
-  }
+    function loadStaticData() {
+        return Promise.all([userStore.fetch()]);
+    }
 
-  function mountPage() {
-    _reactDom2.default.render(_react2.default.createElement(_TodoContainer2.default, { stores: stores }), document.getElementById('root'));
-  }
+    function mountPage() {
+        _reactDom2.default.render(_react2.default.createElement(_TodoContainer2.default, { stores: stores }), document.getElementById('root'));
+    }
 
-  loadStaticData().then(mountPage);
+    loadStaticData().then(mountPage);
 })();
 
-},{"./components/TodoContainer.jsx":1,"./dataaccess/TodoDataService":5,"./dataaccess/UserDataService":6,"./stores/TodoStore":99,"./stores/UserStore":100,"react":92,"react-dom":89}],8:[function(require,module,exports){
+},{"./components/TodoContainer.jsx":1,"./gateways/TodoGateway":5,"./gateways/UserGateway":6,"./stores/TodoStore":99,"./stores/UserStore":100,"react":92,"react-dom":89}],8:[function(require,module,exports){
 var baseCreate = require('./_baseCreate'),
     baseLodash = require('./_baseLodash');
 
@@ -25072,13 +25072,13 @@ var _partial2 = _interopRequireDefault(_partial);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function TodoStore(dataService, userStore) {
+function TodoStore(gateway, userStore) {
   var todos = [];
   var eventEmitter = new _microEmitter2.default();
   var CHANGE_EVENT = "change";
 
   function fetch() {
-    return dataService.get().then(setLocalTodos);
+    return gateway.get().then(setLocalTodos);
   }
 
   function setLocalTodos(newTodos) {
@@ -25086,7 +25086,11 @@ function TodoStore(dataService, userStore) {
     eventEmitter.emit(CHANGE_EVENT);
   }
 
-  function toViewModel(todo) {
+  function onChange(handler) {
+    eventEmitter.on(CHANGE_EVENT, handler);
+  }
+
+  function toTodoView(todo) {
     return Object.freeze({
       id: todo.id,
       title: todo.title,
@@ -25107,12 +25111,7 @@ function TodoStore(dataService, userStore) {
 
   function getBy(query) {
     var top = 25;
-    var byQuery = (0, _partial2.default)(queryContainsTodo, query);
-    return todos.filter(byQuery).map(toViewModel).sort(descById).slice(0, top);
-  }
-
-  function onChange(handler) {
-    eventEmitter.on(CHANGE_EVENT, handler);
+    return todos.filter((0, _partial2.default)(queryContainsTodo, query)).map(toTodoView).sort(descById).slice(0, top);
   }
 
   return Object.freeze({

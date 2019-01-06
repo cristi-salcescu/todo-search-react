@@ -1,4 +1,4 @@
-export default function UserDataService(){
+export default function UserGateway(){
   const url = "https://jsonplaceholder.typicode.com/users";
 
   function get() {

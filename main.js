@@ -1,22 +1,22 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import TodoDataService from "./dataaccess/TodoDataService";
-import UserDataService from "./dataaccess/UserDataService";
+import TodoGateway from "./gateways/TodoGateway";
+import UserGateway from "./gateways/UserGateway";
 import TodoStore from "./stores/TodoStore";
 import UserStore from "./stores/UserStore";
 import TodoContainer from "./components/TodoContainer.jsx";
 
 (function startApplication(){
-    const userDataService = UserDataService();
-    const todoDataService = TodoDataService();
-    const userStore = UserStore(userDataService);
-    const todoStore = TodoStore(todoDataService, userStore);
+    const userGateway = UserGateway();
+    const todoGateway = TodoGateway();
+    const userStore = UserStore(userGateway);
+    const todoStore = TodoStore(todoGateway, userStore);
     
     const stores = {
       todoStore,
       userStore
     };
-  
+
     function loadStaticData(){
       return Promise.all([userStore.fetch()]);
     }

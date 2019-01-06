@@ -1,21 +1,25 @@
 import MicroEmitter from 'micro-emitter';
 import partial from "lodash/partial";
 
-export default function TodoStore(dataService, userStore){
+export default function TodoStore(gateway, userStore){
     let todos = [];
     const eventEmitter = new MicroEmitter();
     const CHANGE_EVENT = "change";
     
     function fetch() {
-      return dataService.get().then(setLocalTodos);
+      return gateway.get().then(setLocalTodos);
     }
 
     function setLocalTodos(newTodos){
       todos = newTodos;
       eventEmitter.emit(CHANGE_EVENT);
     }
+
+    function onChange(handler){
+      eventEmitter.on(CHANGE_EVENT, handler);
+    }
     
-    function toViewModel(todo){
+    function toTodoView(todo){
       return Object.freeze({
         id : todo.id,
         title : todo.title,
@@ -36,14 +40,9 @@ export default function TodoStore(dataService, userStore){
     
     function getBy(query) {
       const top = 25;
-      const byQuery = partial(queryContainsTodo, query);
-      return todos.filter(byQuery)
-                  .map(toViewModel)
+      return todos.filter(partial(queryContainsTodo, query))
+                  .map(toTodoView)
                   .sort(descById).slice(0, top);
-    }
-
-    function onChange(handler){
-      eventEmitter.on(CHANGE_EVENT, handler);
     }
     
     return Object.freeze({ 
