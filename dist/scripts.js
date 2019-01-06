@@ -25135,13 +25135,13 @@ var _microEmitter2 = _interopRequireDefault(_microEmitter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function UserStore(dataService) {
+function UserStore(gateway) {
     var usersMap = [];
     var eventEmitter = new _microEmitter2.default();
     var CHANGE_EVENT = "change";
 
     function fetch() {
-        return dataService.get().then(setLocalUsers);
+        return gateway.get().then(setLocalUsers);
     }
 
     function setLocalUsers(newUsers) {

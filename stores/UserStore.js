@@ -1,12 +1,12 @@
 import MicroEmitter from 'micro-emitter';
 
-export default function UserStore(dataService){
+export default function UserStore(gateway){
     let usersMap = []; 
     const eventEmitter = new MicroEmitter();
     const CHANGE_EVENT = "change";
     
     function fetch() {
-      return dataService.get().then(setLocalUsers);
+      return gateway.get().then(setLocalUsers);
     }
 
     function setLocalUsers(newUsers){
