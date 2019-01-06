@@ -7,19 +7,19 @@ test("TodoStore can filter by title text", function() {
         { id: 2, title : "title 2" },
         { id: 3, title : "title 3" }
     ];
-    const todoDataService = {
+    const todoGatewayFake = {
         get : function(){
             return Promise.resolve(allTodos);
         }
     };
-    const userStore = {
+    const userStoreFake = {
         getById : function(){
             return  {
                 name : "Test"
             };
         }
     };
-    const todoStore = TodoStore(todoDataService, userStore);
+    const todoStore = TodoStore(todoGatewayFake, userStoreFake);
     const query = { text: "title 1" };
     const expectedOutputTodos = [
         { id: 1, title : "title 1" , userName : "Test"}
